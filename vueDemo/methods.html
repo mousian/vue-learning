@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{message}}</h1>
+			<button v-on:click="popShuai">我很帅</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				message:"Hello!",
+				call:"this is a test!"
+			},
+			methods:{
+				popShuai:function(){
+					console.log(this.message);  //Hello!
+					var rep=this;
+					var message="不帅";
+					function test(){
+						console.log(this.message);  //undefined
+						console.log(rep.message);  //Hello!
+					} 
+					test();
+				}
+			}
+		});
+		
+		
+		//console.log(vm.$data.message)
+		
+	</script>
+</html>

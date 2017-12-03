@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap.mini.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="row" style="padding-top: 20px;padding-left: 40px;">
+				<div class="col-md-2">
+					<h1 id="con" v-on:mouseup="copyDate">这个是很神奇的实现！！</h1>
+				</div>
+				<div class="col-md-2">
+					<a id='baidu'>https://www.baidu.com/</a>
+				</div>
+				<div class="col-md-2">
+					<button @click="copyDate">复制</button>
+					<button id="my-button" data-clipboard-text="Copy me!" @click="copyDate">Copy to Clipboard</button>
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/dist/ZeroClipboard.min.js" ></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+
+			},
+			methods: {
+				copyDate: function() {
+					
+					ZeroClipboard.config( { swfPath: "../js/ZeroClipboard.swf" } );
+					var client = new ZeroClipboard( $("button#my-button") );
+					alert(client);
+					ZeroClipboard.setData( "text/plain", "Copy me!" );
+					/*var clipboardData = window.clipboardData;
+					alert(clipboardData);
+					clipboardData.setData('url', document.getElementById("baidu").innerHTML);
+					alert('复制成功！');*/
+				},
+				pasteDate: function() {
+					var client = new ZeroClipboard( document.getElementById("copy-button") );
+					client.on("ready", function(readyEvent) {
+						alert( "ZeroClipboard SWF is ready!" );
+
+						client.on("aftercopy", function(event) {
+							// `this` === `client`
+							// `event.target` === the element that was clicked
+							event.target.style.display = "none";
+							alert("Copied text to clipboard: " + event.data["text/plain"]);
+						});
+					});
+
+					/*var inputDom = document.getElementById("inp");
+					e = window.event;
+					var clipboardData = e.clipboardData || window.clipboardData;
+					var clipboard = clipboardData.getData('Text');
+					alert(clipboard);*/
+				}
+			}
+		});
+
+		/*var utils = {
+			clipboard: function(text, button, msg, parent) {
+				if(window.clipboardData) { //如果是IE浏览器
+					var copyBtn = document.getElementById(button);
+					copyBtn.onclick = function() {
+						window.clipboardData.setData('text', text);
+						alert(msg);
+					}
+				} else { //非IE浏览器
+					var clip = new ZeroClipboard.Client(); //初始化一个剪切板对象
+					clip.setHandCursor(true); //设置手型游标
+					clip.setText(text); //设置待复制的文本内容
+					clip.addEventListener("mouseUp", function(client) { //绑定mouseUp事件触发复制
+						alert(msg);
+					});
+					clip.glue(button, parent); //调用ZeroClipboard.js的内置方法处理flash的位置的问题
+				}
+				return false;
+			}
+		}*/
+
+		/*$(function() {
+			utils.clipboard($("#con").val(), "btnCopy", "复制成功", 'btnCopy'); //调用方式
+		})*/
+	</script>
+
+</html>

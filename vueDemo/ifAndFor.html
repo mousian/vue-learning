@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../css/bootstrap.mini.css" />
+		<title></title>
+	</head>
+
+	<body>
+
+		<div id="app">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>姓名</th>
+						<th>年龄</th>
+						<th>序号</th>
+					</tr>
+				</thead>
+				<thead v-for="(person,index) in jsonRe">
+					<tr>
+						<th>{{person.name}}</th>
+						<th>{{person.age}}</th>
+						<th>{{index}}</th>
+					</tr>
+				</thead>
+			</table>
+
+			<div v-for="value in alien" v-if="value==10000">
+				{{value}}
+			</div>
+
+			<div v-if="2<3">
+				<div v-for="value in alien">
+					{{value}}
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				arrNum: [1, 2, 3, 4, 5, 6, 7, 8],
+				jsonRe: [{
+					name: "san",
+					age: 33
+				}, {
+					name: "si",
+					age: 12
+				}, {
+					name: "wu",
+					age: 31
+				}, {
+					name: "liu",
+					age: 11
+				}, {
+					name: "qi",
+					age: 16
+				}, {
+					name: "sds",
+					age: 5
+				}],
+
+				alien: {
+					name: "haha",
+					age: 10000,
+					height: 30
+				}
+			},
+			methods: {
+				tellTheArr: function() {
+					console.log(typeof this.arrNum)
+				}
+			}
+		});
+	</script>
+
+</html>

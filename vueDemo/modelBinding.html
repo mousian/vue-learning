@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<style>
+		.split {
+			margin-top: 30px;
+			border: 1px solid;
+			color: #000000;
+		}
+	</style>
+
+	<body>
+		<!--使用vue.js进行数据绑定-->
+		<div id="app">
+			<p>{{ message }}</p>
+			<input v-model="message">
+		</div>
+
+		<div class="split"></div>
+
+        <!--使用 angular.js进行数据绑定-->
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<p>{{message}}</p>
+			<input ng-model="message">
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<script>
+		//使用vue实例
+		new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue.js!'
+			}
+		});
+        
+        //使用angular
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+			$scope.message = "Hello angular.js!";
+		});
+	</script>
+
+</html>

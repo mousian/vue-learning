@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap.mini.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="row" style="padding-top: 20px;padding-left: 40px;">
+				<div class="col-md-2">
+					<input v-model="content.amount" id="inp" />
+				</div>
+				<div class="col-md-2">
+					<button v-on:click="changeValue">换一个属性</button>
+				</div>
+			</div>
+			<div class="row">
+				
+				
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				content: {
+					amount: 20,
+					name: 'David',
+					age: 26,
+					hobby: 'coding',
+					hobbyn: ['Test', 'Online', 'Swimming'],
+					anthingElse: 'change World!'
+				}
+			},
+			methods: {
+				/**
+				 * 获取数据content对象中的key
+				 */
+				getContentValue: function() {
+					var vm = this;
+					var keys = new Array();
+					for(var key in vm.content) {
+						keys.push(key);
+					}
+					return keys;
+				},
+				findKey: function(keys, value) {
+					var content = this.content;
+					for(var i = 0; i < keys.length; i++) {
+						if(value == content[keys[i]]) {
+							return i;
+						}
+					}
+				},
+				/**
+				 * 改变输入框中的值
+				 */
+				changeValue: function() {
+					var keys = this.getContentValue();
+					var inputValue = document.getElementById("inp").value;
+					//查出当前value对应的key
+					var ke = this.findKey(keys, inputValue);
+					if(ke == (keys.length - 1)) {
+						ke = 0;
+					} else {
+						ke = ke + 1;
+					}
+					var finalShow = this.content[keys[ke]];
+					document.getElementById("inp").value = finalShow;
+				}
+			}
+		});
+	</script>
+
+</html>

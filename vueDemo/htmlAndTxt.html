@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div v-html="html.one + html.two"></div>
+			<span v-text="txt"></span>
+			<span>{{txt}}</span>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/vue.min.js" ></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				html:{
+					one:'<h1>我是一个简单的hello</h1>',
+					two:'<h6>我是一个很小的World!</h6>'
+				},
+				txt:"I Like Smile!"
+			}
+		});
+		
+		
+	</script>
+</html>
