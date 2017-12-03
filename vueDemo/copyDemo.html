@@ -6,31 +6,54 @@
 		<title></title>
 	</head>
 
-	<body>
-		<button id="my-button" data-clipboard-text="Copy me!">Copy to Clipboard</button>
+	<body oncontextmenu="hideMenu()">
+		<input id="contentReady" value="这里是要复制的内容"></input>
+		<button id="my-button">Copy to Clipboard</button>
+		<textarea id="contentArea" onmousedown="pasteData(event)"></textarea>
 	</body>
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/dist/ZeroClipboard.min.js"></script>
+	<script type="text/javascript" src="../js/dist/ZeroClipboard.js"></script>
 	<script>
-		
-		var client = new ZeroClipboard( $('#my-button') );
-		
+		/**
+		 * 点击复制文本到粘贴板
+		 */
+		var client = new ZeroClipboard($('#my-button'));
 		client.on('ready', function(event) {
-			 console.log( 'movie is loaded' );
- 
+			console.log('swf文件已加载');
+
 			client.on('copy', function(event) {
-				event.clipboardData.setData('text/plain', event.target.innerHTML);
+				event.clipboardData.setData('text/plain', document.getElementById("contentReady").value);
 			});
 
 			client.on('aftercopy', function(event) {
 				console.log('Copied text to clipboard: ' + event.data['text/plain']);
+				alert('复制成功');
 			});
 		});
 
 		client.on('error', function(event) {
-			// console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
 			ZeroClipboard.destroy();
 		});
+
+        /**
+         * 右键粘贴剪切板上的内容
+         * @param {Object} event
+         */
+		function pasteData(event) {
+			var btnNum = event.button; //0 左键，1中键，2右键
+			if(btnNum == 2) {
+				var data = ZeroClipboard.getData('text/plain');
+				document.getElementById('contentArea').innerHTML=data;
+			}
+		}
+
+		/**
+		 * 右键不显示系统上下文菜单
+		 */
+		function hideMenu() {
+			window.event.returnValue = false;
+			return false;
+		}
 	</script>
 
 </html>
