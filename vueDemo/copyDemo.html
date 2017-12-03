@@ -9,6 +9,8 @@
 	<body oncontextmenu="hideMenu()">
 		<input id="contentReady" value="这里是要复制的内容"></input>
 		<button id="my-button">Copy to Clipboard</button>
+		<input id="contentReady2" value="这里是要复制的内容52523453"></input>
+		<button id="testBtn" onclick="copyUrl()">另一种方法</button>
 		<textarea id="contentArea" onmousedown="pasteData(event)"></textarea>
 	</body>
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -53,6 +55,15 @@
 		function hideMenu() {
 			window.event.returnValue = false;
 			return false;
+		}
+		
+		/**
+		 * 使用浏览器复制命令复制
+		 */
+		function copyUrl(){
+			var cr2 = document.getElementById('contentReady2'); 
+			cr2.select();
+			document.execCommand("Copy");
 		}
 	</script>
 
