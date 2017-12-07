@@ -10,7 +10,7 @@
 }(this, (function () { 'use strict';
 
 /*  */
-
+ 
 /**
  * Convert a value to a string that is actually rendered.
  */
